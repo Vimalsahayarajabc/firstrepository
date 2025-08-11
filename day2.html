@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Student Registration</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #eef2f3;
+        padding: 20px;
+    }
+    .container {
+        max-width: 450px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+    label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+    input, select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #218838;
+    }
+    small {
+        color: red;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Student Registration</h2>
+    <form id="registrationForm" onsubmit="return validateForm()">
+        
+        <label for="name">Name:</label>
+        <input type="text" id="name">
+        <small id="nameError"></small>
+        
+        <label for="email">Email:</label>
+        <input type="text" id="email">
+        <small id="emailError"></small>
+        
+        <label for="department">Department:</label>
+        <select id="department">
+            <option value="">--Select Department--</option>
+            <option value="CSE">CSE</option>
+            <option value="IT">IT</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="MECH">MECH</option>
+        </select>
+        <small id="deptError"></small>
+        
+        <label for="year">Year:</label>
+        <select id="year">
+            <option value="">--Select Year--</option>
+            <option value="1">1st Year</option>
+            <option value="2">2nd Year</option>
+            <option value="3">3rd Year</option>
+            <option value="4">4th Year</option>
+        </select>
+        <small id="yearError"></small>
+        
+        <label for="project">Project Title:</label>
+        <input type="text" id="project">
+        <small id="projectError"></small>
+        
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+<script>
+function validateForm() {
+    let valid = true;
+
+    // Get field values
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let dept = document.getElementById("department").value;
+    let year = document.getElementById("year").value;
+    let project = document.getElementById("project").value.trim();
+
+    // Error message elements
+    let nameErr = document.getElementById("nameError");
+    let emailErr = document.getElementById("emailError");
+    let deptErr = document.getElementById("deptError");
+    let yearErr = document.getElementById("yearError");
+    let projectErr = document.getElementById("projectError");
+
+    // Clear old messages
+    nameErr.textContent = "";
+    emailErr.textContent = "";
+    deptErr.textContent = "";
+    yearErr.textContent = "";
+    projectErr.textContent = "";
+
+    // Validation
+    if (name === "") {
+        nameErr.textContent = "Name is required.";
+        valid = false;
+    }
+
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email === "") {
+        emailErr.textContent = "Email is required.";
+        valid = false;
+    } else if (!emailPattern.test(email)) {
+        emailErr.textContent = "Invalid email format.";
+        valid = false;
+    }
+
+    if (dept === "") {
+        deptErr.textContent = "Select a department.";
+        valid = false;
+    }
+
+    if (year === "") {
+        yearErr.textContent = "Select a year.";
+        valid = false;
+    }
+
+    if (project === "") {
+        projectErr.textContent = "Project title is required.";
+        valid = false;
+    }
+
+    // If all valid, show success message
+    if (valid) {
+        alert("Registration Successful");
+    }
+
+    return valid;
+}
+</script>
+
+</body>
+</html>
